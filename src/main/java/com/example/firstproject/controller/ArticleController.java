@@ -3,11 +3,13 @@ package com.example.firstproject.controller;
 import com.example.firstproject.dto.ArticleForm;
 import com.example.firstproject.entity.Article;
 import com.example.firstproject.repository.ArticleRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+@Slf4j
 @Controller
 public class ArticleController {
     //import
@@ -23,13 +25,16 @@ public class ArticleController {
     //template -> DTO -> Controller MVC패턴
     public String createArticle(ArticleForm form){
         //데이터 잘 받아왔는지 확인
-        System.out.println(form);
+//        System.out.println(form);
+        log.info(form.toString());
         //1. DTO를 DB에 저장하기 위해 Entity로 변환하자!
         Article article = form.toEntity();
-        System.out.println(article.toString());// 잘 변환됐나?
+//        System.out.println(article.toString());// 잘 변환됐나?
+        log.info(article.toString());
         //2. Entity를 Repository로 DB에 저장하자!
         Article saved = articleRepository.save(article);
-        System.out.println(saved.toString());// 잘 저장됐나?
+//        System.out.println(saved.toString());// 잘 저장됐나?
+        log.info(saved.toString());
         return "";
     }
 }
