@@ -25,6 +25,7 @@ public class ArticleController {
         return "articles/new";
     }
 
+    //회원 insert
     @PostMapping("/articles/create")
     //template -> DTO -> Controller MVC패턴
     public String createArticle(ArticleForm form){
@@ -39,15 +40,15 @@ public class ArticleController {
         Article saved = articleRepository.save(article);
 //        System.out.println(saved.toString());// 잘 저장됐나?
         log.info(saved.toString());
-        return "";
+        return "redirect:/articles/"+saved.getId();
     }
 
+    //특정 게시물
     @GetMapping("/articles/{id}") //id는 변수로 사용됨
     public String show(@PathVariable Long id, Model model){ //id를 매개변수로 받아옴
 
         //잘 받아왔나 확인
         log.info("id : "+id);
-
         //1. id를 조회해 데이터 받아오기 반환형 -> Optional<Article>
         Article articelEntity = articleRepository.findById(id).orElse(null);
         //2. 모델에 데이터 등록하기
@@ -56,6 +57,7 @@ public class ArticleController {
         return "articles/show";
     }
 
+    //전체 게시물
     @GetMapping("/articles")
     public String index(Model model){
         //1.모든 데이터 가져오기 ArrayList ->List로 업캐스팅 할 수도 있음.

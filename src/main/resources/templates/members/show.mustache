@@ -1,0 +1,26 @@
+<!-- header -->
+{{>layouts/header}}
+
+<!-- content -->
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">아이디</th>
+        <th scope="col">이메일</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#member}}
+
+        <tr>
+            <th >{{id}}</th>
+            <td >{{email}}</td>
+        </tr>
+
+
+    {{/member}}
+    </tbody>
+</table>
+
+<!-- footer -->
+{{>layouts/footer}}
